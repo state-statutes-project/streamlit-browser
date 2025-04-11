@@ -52,6 +52,10 @@ def main():
 
     new_mcu_list = [] # We only want to keep some of the fields in the mcu_list
     for mcu in mcu_list:
+
+        # We want to skip local laws for Alabama
+        if {'type': 'Title', 'number': '45', 'name': 'Local Laws.'} in mcu["path"]:
+            continue
         
         mcu_id = mcu["unique_id"]
 
@@ -89,7 +93,6 @@ def main():
             "tag_dict_list": tag_dict_list
         }
         new_mcu_list.append(new_mcu)
-
     
     
     # Save the mcu_list as a compressed parquet file
